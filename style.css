@@ -184,3 +184,11 @@ footer {
     margin: 0px 10px;
     list-style-type: none;
 }
+
+.PMISFooter li a {
+    color: white !important
+}
+
+.backUpMsg {
+    margin-left: 20px;
+}

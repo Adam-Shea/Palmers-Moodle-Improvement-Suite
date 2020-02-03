@@ -9,6 +9,7 @@ function save_options() {
     var uspFlash = document.getElementById("uspFlash").checked;
     var videoBackground = document.getElementById("videoBackground").checked;
     var customFooter = document.getElementById("customFooter").checked;
+    var customCSS = document.getElementById("customCSS").value;
     chrome.storage.sync.set({
         selectedTheme: theme,
         selectedAds: ads,
@@ -19,13 +20,12 @@ function save_options() {
         selectedMenu: sideMenu,
         selectedBackground: videoBackground,
         selectedUspFlash: uspFlash,
-        selectedCustomFooter: customFooter
+        selectedCustomFooter: customFooter,
+        selectedCustomCSS: customCSS
     }, function() {
         // Update status to let user know options were saved.
     });
-    chrome.tabs.executeScript(null, { file: "videoRemove.js" });
     changeTheme();
-    window.close();
 }
 
 // Restores select box and checkbox state using the preferences
@@ -41,7 +41,8 @@ function restore_options() {
         selectedMenu: false,
         selectedBackground: false,
         selectedUspFlash: true,
-        selectedCustomFooter: true
+        selectedCustomFooter: true,
+        selectedCustomCSS: ""
     }, function(items) {
         document.getElementById('theme').value = items.selectedTheme;
         document.getElementById('ads').checked = items.selectedAds;
@@ -52,89 +53,51 @@ function restore_options() {
         document.getElementById("uspFlash").checked = items.selectedUspFlash;
         document.getElementById("videoBackground").checked = items.selectedBackground;
         document.getElementById("customFooter").checked = items.selectedCustomFooter;
+        document.getElementById("customCSS").value = items.selectedCustomCSS;
     });
 }
 document.addEventListener('DOMContentLoaded', restore_options);
+
+
 window.onload = function() {
     changeTheme()
-    document.getElementById('saveBtn').addEventListener('click', save_options);
+    document.getElementById("sideMenu").addEventListener('input', save_options);
+    document.getElementById("uspFlash").addEventListener('input', save_options);
+    document.getElementById("theme").addEventListener('input', save_options);
+    document.getElementById("ads").addEventListener('input', save_options);
+    document.getElementById("customFooter").addEventListener('input', save_options);
+    document.getElementById("splashVideo").addEventListener('input', save_options);
+    document.getElementById("videoBackground").addEventListener('input', save_options);
+    document.getElementById("muteAudio").addEventListener('input', save_options);
+    document.getElementById("customURL").addEventListener('input', save_options);
+    document.getElementById("customCSS").addEventListener('input', save_options);
 }
 
 function changeTheme() {
     chrome.storage.sync.get({
         selectedTheme: "Dark", //Default Values
-        selectedAds: true,
-        selectedDisclaimer: true,
-        selectedSpash: false,
-        selectedURL: "",
-        selectedMute: true,
-        selectedMenu: false,
-        selectedBackground: false
     }, function(items) {
         theme = items.selectedTheme;
-        adsOn = items.selectedAds;
-        disclaimer = items.selectedDisclaimer;
-        splashVideo = items.selectedSpash;
-        customURL = items.selectedURL;
-        muteAudio = items.selectedMute;
-        sideMenu = items.selectedMenu;
-        videoBackground = items.selectedBackground;
-
-        if (theme == "Dark") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "#0B0B0A");
-            root.style.setProperty('--secondaryColor', "#1D1C1A");
-            root.style.setProperty('--textColor', "white");
-        }
-        if (theme == "Tree") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "#609e60");
-            root.style.setProperty('--secondaryColor', "#556B2F");
-            root.style.setProperty('--textColor', "white");
-        }
-        if (theme == "Paper") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "#F8E0C8");
-            root.style.setProperty('--secondaryColor', "#B99566");
-            root.style.setProperty('--textColor', "#78233F");
-        }
-        if (theme == "Vomit") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "red");
-            root.style.setProperty('--secondaryColor', "#39FF14");
-            root.style.setProperty('--textColor', "#FAED27");
-        }
-        if (theme == "Candy") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "#c9fdff");
-            root.style.setProperty('--secondaryColor', "#ffcbcb");
-            root.style.setProperty('--textColor', "black");
-        }
-        if (theme == "Rhubarb&Custard") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "#9aceff");
-            root.style.setProperty('--secondaryColor', "#4a69bb");
-            root.style.setProperty('--textColor', "black");
-        }
-        if (theme == "HellSpawn") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "#0B0B0A");
-            root.style.setProperty('--secondaryColor', "#cc3333");
-            root.style.setProperty('--textColor', "white");
-        }
-        if (theme == "Transparent") {
-            let root = document.documentElement;
-
-            root.style.setProperty('--primaryColor', "rgba(0, 0, 0, 0)");
-            root.style.setProperty('--secondaryColor', "rgba(0, 0, 0, 0.2)");
-            root.style.setProperty('--textColor', "white");
-        }
+        setCustTheme("Default", "white", "#57B6EF", "black");
+        setCustTheme("Dark", "#0B0B0A", "#1D1C1A", "white");
+        setCustTheme("Tree", "#609e60", "#556B2F", "white");
+        setCustTheme("Paper", "#F8E0C8", "#B99566", "78233F");
+        setCustTheme("Vomit", "red", "#39FF14", "FAED27");
+        setCustTheme("Candy", "#c9fdff", "#ffcbcb", "black");
+        setCustTheme("Rhubarb&Custard", "#9aceff", "#4a69bb", "black");
+        setCustTheme("HellSpawn", "#0B0B0A", "#cc3333", "white");
+        setCustTheme("Transparent", "rgba(0, 0, 0, 0)", "rgba(0, 0, 0, 0.2)", "white");
+        setCustTheme("uspTrue", "#0C3455", "#0A2947", "white");
+        //Adds themeing
     })
+}
+
+function setCustTheme(check, prim, seco, text) {
+    if (theme == check) {
+        let root = document.documentElement;
+
+        root.style.setProperty('--primaryColor', prim);
+        root.style.setProperty('--secondaryColor', seco);
+        root.style.setProperty('--textColor', text);
+    }
 }
