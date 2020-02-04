@@ -97,7 +97,8 @@ footer {
     background-color: var(--primaryColor) !important;
 }
 
-.hasevent {
+.hasevent,
+.summary_assignsubmission_comments_15590 {
     background-color: var(--secondaryColor) !important;
 }
 
@@ -142,6 +143,10 @@ article {
     padding: 10px;
 }
 
+.icon {
+    color: var(--textColor) !important;
+}
+
 article p {
     font-size: 17px;
 }
@@ -163,12 +168,12 @@ article p {
     font-weight: normal !important;
 }
 
-iframe {
+.bg-inverse {
     margin: 5px;
 }
 
-footer {
-    background: #3A424C;
+.bg-inverse {
+    background-color: var(--secondaryColor)!important;
 }
 
 .PMISFooter {
@@ -191,4 +196,16 @@ footer {
 
 .backUpMsg {
     margin-left: 20px;
+}
+
+.card {
+    border-radius: 10px !important;
+}
+
+.fp-path-folder {
+    background: none !important;
+}
+
+.fp-filename-field {
+    color: var(--secondaryColor) !important;
 }

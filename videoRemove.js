@@ -4,8 +4,8 @@ if (window.location == "https://portal.uspcollege.ac.uk/moodle/") {
 
 
 if ((window.location).toString().includes("https://portal.uspcollege.ac.uk/moodle/")) {
-    var version = "1.3.0";
-    var buildNum = 14;
+    var version = "1.3.1";
+    var buildNum = 15;
 
     var adsOn = true;
     var theme = "Dark";
@@ -59,9 +59,7 @@ if ((window.location).toString().includes("https://portal.uspcollege.ac.uk/moodl
         setCustTheme("uspTrue", "#0C3455", "#0A2947", "white");
         //Adds themeing
 
-        console.log(customFooter);
         if (customFooter == true) {
-            console.log("Test");
             var d = new Date();
             var currentDay = d.getDay();
             window.currentDate = d.getDate();
