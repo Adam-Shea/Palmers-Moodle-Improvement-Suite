@@ -1,0 +1,411 @@
+:root {
+    --faceSize: 100px;
+    --movementSize: 50px;
+    --rotateSize: -50px;
+}
+
+body {
+    margin: 0px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: black;
+}
+
+nav {
+    position: sticky;
+    width: 100%;
+    background: black;
+    margin-top: -10px;
+}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+li {
+    list-style-type: none;
+    margin: 10px 10px;
+}
+
+li a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    padding: 8px;
+}
+
+li a::selection {
+    color: none;
+    background: none;
+}
+
+.contact {
+    background: white;
+    color: black;
+    border: solid 1px white;
+}
+
+.contact:hover {
+    background: black;
+    color: white;
+    border: solid 1px white;
+}
+
+.hero {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    background: black;
+    color: white;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+}
+
+.heroInfo {
+    display: flex;
+    opacity: 0;
+    flex-direction: column;
+    align-items: center;
+    max-width: 900px;
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+    animation-delay: 0.3s;
+    text-align: center;
+}
+
+.callToASect {
+    margin-bottom: 50px;
+}
+
+.hero {
+    padding-bottom: 50px;
+}
+
+.hero div button {
+    border: solid white 3px;
+    background: black;
+    color: white;
+    padding: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    margin: 10px 30px;
+}
+
+.hero div button:hover {
+    background: white;
+    color: black;
+    cursor: pointer;
+}
+
+.hero div button::selection {
+    color: none;
+    background: none;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 70px;
+}
+
+.subHead {
+    text-align: center;
+    font-size: 17px;
+    max-width: 700px;
+    margin-top: -40px;
+    font-family: 'Roboto', sans-serif;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes fadeIn2 {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.about {
+    flex-wrap: wrap;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    padding-bottom: 50px;
+    animation-name: backgroundFade;
+    animation-fill-mode: forwards;
+    animation-duration: 0.7s;
+    animation-delay: 0.3s;
+}
+
+@keyframes backgroundFade {
+    from {
+        background: black;
+    }
+    to {
+        background: white;
+    }
+}
+
+.aboutInfo {
+    max-width: 600px;
+    text-align: right;
+    font-family: 'Roboto', sans-serif;
+    margin: 0px 40px;
+    font-size: 20px;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-fill-mode: forwards;
+    animation-duration: 0.9s;
+    animation-delay: 0.5s;
+}
+
+.cubeHolder {
+    display: flex;
+    justify-content: space-around;
+    width: 40%;
+    margin-top: 90px;
+}
+
+.cubeCanvas {
+    width: var(--faceSize);
+    height: var(--faceSize);
+    margin: 0px 20px;
+}
+
+.cube {
+    width: var(--faceSize);
+    height: var(--faceSize);
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(0px);
+    transition: transform 2s;
+}
+
+.cube1 {
+    width: var(--faceSize);
+    height: var(--faceSize);
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    transition: transform 1s;
+}
+
+.cube2 {
+    width: var(--faceSize);
+    height: var(--faceSize);
+    position: relative;
+    transform-style: preserve-3d;
+    transform: translateZ(0px);
+    transition: transform 1s;
+}
+
+.cube.show-O {
+    transform: translateZ(var(--rotateSize)) rotateY( 0deg);
+}
+
+.cube.show-U {
+    transform: translateZ(var(--rotateSize)) rotateY(-90deg);
+}
+
+.cube.show-I {
+    transform: translateZ(var(--rotateSize)) rotateY(-180deg);
+}
+
+.cube.show-O2 {
+    transform: translateZ(var(--rotateSize)) rotateY( 90deg);
+}
+
+.cube.show-I2 {
+    transform: translateZ(var(--rotateSize)) rotateX( -90deg);
+}
+
+.cube.show-U2 {
+    transform: translateZ(var(--rotateSize)) rotateX( 90deg);
+}
+
+.cube__face {
+    position: absolute;
+    width: var(--faceSize);
+    height: var(--faceSize);
+    line-height: var(--faceSize);
+    font-size: 70px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    color: black;
+    border: 2px black solid;
+    background: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cube__face::selection {
+    color: none;
+    background: none;
+}
+
+.cube__face--O {
+    transform: rotateY( 0deg) translateZ(var(--movementSize));
+}
+
+.cube__face--U {
+    transform: rotateY( 90deg) translateZ(var(--movementSize));
+}
+
+.cube__face--I {
+    transform: rotateY(180deg) translateZ(var(--movementSize));
+}
+
+.cube__face--O2 {
+    transform: rotateY(-90deg) translateZ(var(--movementSize));
+}
+
+.cube__face--I2 {
+    transform: rotateX( 90deg) translateZ(var(--movementSize));
+}
+
+.cube__face--U2 {
+    transform: rotateX(-90deg) translateZ(var(--movementSize));
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+}
+
+.services {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0px;
+}
+
+.card {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+.card p {
+    max-width: 700px;
+}
+
+.contactUs {
+    flex-wrap: wrap;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+    padding-bottom: 50px;
+    animation-name: backgroundFade;
+    animation-fill-mode: forwards;
+    animation-duration: 0.9s;
+    animation-delay: 1.2s;
+}
+
+.contactUs div {
+    flex-wrap: wrap;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+.contactInfo p {
+    max-width: 500px;
+    text-align: right;
+}
+
+.contactInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    max-width: 700px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.contactInfo ul {
+    display: flex;
+    flex-direction: column;
+}
+
+@media only screen and (max-width:1133px) {
+    .services {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .middle {
+        background: white;
+        color: black;
+    }
+    .card {
+        width: 100%;
+    }
+    .card p {
+        max-width: 350px;
+    }
+    .about h2,
+    .about p {
+        text-align: center;
+    }
+    iframe {
+        width: 75%;
+    }
+}
+
+@media only screen and (max-width:831px) {
+    .h1Shadow {
+        display: none;
+    }
+}
+
+@media only screen and (max-width:455px) {
+    h1 {
+        font-size: 40px;
+        word-wrap: break-word;
+    }
+    h2 {
+        font-size: 30px;
+    }
+    .subHead {
+        margin-top: 0px;
+    }
+    .cubeHolder {
+        margin-bottom: 30px;
+    }
+}
+
+@media only screen and (max-width: 419px) {
+    .cube__face {
+        width: 50px;
+        height: 50px;
+    }
+     :root {
+        --faceSize: 50px;
+        --movementSize: 25px;
+        --rotateSize: -25px;
+    }
+    .cube__face {
+        font-size: 50px;
+    }
+}
